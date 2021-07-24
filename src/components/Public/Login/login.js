@@ -1,4 +1,4 @@
-import Cookies from 'universal-cookie';
+
 import React, { Component , useState  } from 'react';
 import loginService from '../../../services/Public/login.service';
 import { useHistory } from 'react-router-dom';
