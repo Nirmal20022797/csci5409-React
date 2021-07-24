@@ -21,10 +21,18 @@ const Login = () => {
         }
     }
 
-    function handlelogin(){
+    function handlelogin(e){
+        e.preventDefault();
+        console.log("handlelogin")
+        localStorage.setItem("123", "123");
+        
         loginService.loginUser(user).then((response)=>{
             if(response.data.success === true && response.data.message === "Logged IN"){
-                localStorage.clear();
+                // localStorage.clear();
+                console.log("response.data"+JSON.stringify(response.data))
+                console.log(" token",response.data.data.token);
+                console.log(" UserId",response.data.data.id);
+                console.log(" Role",response.data.data.role);
                 localStorage.setItem("isUserLoggedin",true);
                 localStorage.setItem("token",response.data.data.token);
                 localStorage.setItem('UserId',response.data.data.id);
@@ -33,6 +41,7 @@ const Login = () => {
                 window.location.reload();    
             }
         }).catch((error) => {
+            console.log("12233")
             alert(error.response.data.message);
             history.push("/login");
         });
@@ -52,7 +61,7 @@ const Login = () => {
                     <small id="passwordHelp" className="form-text text-danger"></small>
                 </div>
                 <div className="text-center mt-5">
-                    <button type="submit" className="btn btn-primary" onClick={handlelogin} placeholder="Submit">Submit</button>
+                    <button type="submit" className="btn btn-primary" onClick={(e) => handlelogin(e)} placeholder="Submit">Submit</button>
                 </div>
                 <div className="text-center mt-5 ">
                     <p className="mb-sm-0">Forgot Password ?... <a href="#">Click Here</a></p>
